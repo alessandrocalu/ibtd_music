@@ -1,0 +1,8 @@
+[21-Dec-2015 15:46:01 America/Sao_Paulo] PHP Fatal error:  Call to undefined method Produtos_Model::add_categoria() in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/controllers/Home.php on line 75
+[28-Dec-2015 13:14:48 America/Sao_Paulo] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 63
+[28-Dec-2015 13:16:17 America/Sao_Paulo] PHP Fatal error:  Call to a member function num_rows() on a non-object in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 63
+[28-Dec-2015 16:20:33 America/Sao_Paulo] PHP Fatal error:  Call to undefined function atualiza_filhos() in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 107
+[28-Dec-2015 16:20:49 America/Sao_Paulo] PHP Fatal error:  Call to undefined function atualiza_filhos() in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 107
+[28-Dec-2015 16:21:25 America/Sao_Paulo] PHP Fatal error:  Call to undefined function atualiza_filhos() in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 107
+[28-Dec-2015 16:27:58 America/Sao_Paulo] PHP Fatal error:  Cannot use object of type stdClass as array in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 123
+[28-Dec-2015 16:28:15 America/Sao_Paulo] PHP Fatal error:  Cannot use object of type stdClass as array in /home/estaleir/public_html/www/projetos/gerencia_produtos/application/models/Produtos_model.php on line 123
