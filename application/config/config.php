@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://estaleirodigital.com/www/projetos/gerencia_produtos/';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

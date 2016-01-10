@@ -59,14 +59,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
 */
 
-$active_group = 'web';
+$active_group = 'local';
 $query_builder = TRUE;
 //conexão web
 $db['local'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => '140gigi',
 	'database' => 'free_vesti',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

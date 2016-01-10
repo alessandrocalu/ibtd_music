@@ -9,7 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gerência de Produtos</title>
+    <?php
+    if (!isset($title)) {
+        $title = "Gerência de Produtos";
+    }
+    else
+    {
+        $title = "Gerência de Produtos - ".$title;
+    }
+    ?>
+
+    <title><?php echo $title; ?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('layout/adm/css/bootstrap.min.css'); ?>" rel="stylesheet">
