@@ -21,17 +21,16 @@ else
             </div>
             <!-- /.navbar-header -->
 
-            
             <!-- /.dropdown-tasks -->                
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
+                        <!--<li>
                             <a href="<?php echo base_url('/'); ?>"><i class="fa fa-table fa-fw"></i> Produtos</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url('/grupos'); ?>"><i class="fa fa-sitemap fa-fw"></i> Grupos</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url('/propriedades'); ?>"><i class="fa fa-table fa-fw"></i> Propriedades</a>
                         </li>

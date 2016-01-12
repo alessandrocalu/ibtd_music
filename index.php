@@ -1,4 +1,6 @@
 <?php
+$id_estabelecimento = 1;
+
 /**
  * CodeIgniter
  *

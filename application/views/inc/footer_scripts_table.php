@@ -1,8 +1,8 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
-
+    var table = '';
     $(document).ready(function() {
-        $('#dataTables-lista').DataTable({
+        table = $('#dataTables-lista').DataTable({
             responsive: true,
             language: {
                 lengthMenu:'Mostrar _MENU_ registros',
@@ -29,7 +29,9 @@
             ],
             <?php echo  $columns.',' ?>
             ajax: './<?php echo $controller; ?>/lista_json'
+
         });
+
     });
 
     $('#dataTables-lista').on( 'draw.dt', function () {
@@ -45,23 +47,32 @@
         }
     });
 
+    $('#dataTables-lista tbody').on( 'click', 'tr', function () {
+        edit_modal( table.row( this ).data().id );
+    } );
+
 
     function add_modal(){
 
-        var dados = $('#frmModelMoAdd').serialize();
+        var dados = $('#frmModalAdd').serialize();
 
         $.ajax({
             type: 'POST',
             data: dados,
             url: './<?php echo $controller; ?>/add_json',
             beforeSend: function(){
-                $('#msg_add').html('<div class="alert alert­info">Aguarde, adicionando <?php echo strtolower($title); ?>...</div>');
+                $('#msg_add').html('<div class="alert alert­info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
             },
             success: function(e){
                 if (e == 'OK') {
-                    $('#msg_add').html('<div class="alert alert­danger">Dados gravados com sucesso.</div>').fadeOut(5000);
+
+                    $('#msg_add').html('');
+                    $('#frmModalAdd').each (function(){
+                        this.reset();
+                    });
                     $('#addModal').modal('hide');
                     lista();
+                    modal_sucess('Dados gravados com sucesso.');
                 }
                 else
                 {
@@ -75,15 +86,72 @@
     }
 
 
+    function edit_modal(id){
+        $.ajax({
+            type: 'GET',
+            url: './<?php echo $controller; ?>/edit_form/'+id,
+            beforeSend: function(){
+                $('#msg_modal').html('<div class="alert alert-warning">Aguarde carregando <?php echo strtolower($title); ?>...</div>');
+            },
+            success: function(e){
+                $('#msg_modal').html('');
+                $('#retorno_modal').html(e);
+                $('#editModal').modal();
+            },
+            error: function(){
+                $('#msg_modal').html('<div class="alert alert-danger">Erro: Requisição a servidor falhou, tende novamente!</div>');
+            }
+        });
+    }
+
+    function update_modal(){
+
+        var dados = $('#frmModalEdit').serialize();
+
+        $.ajax({
+            type: 'POST',
+            data: dados,
+            url: './<?php echo $controller; ?>/update_json',
+            beforeSend: function(){
+                $('#msg_edit').html('<div class="alert alert­info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
+            },
+            success: function(e){
+                if (e == 'OK') {
+                    $('#msg_edit').html('');
+                    $('#frmModalEdit').each (function(){
+                        this.reset();
+                    });
+                    $('#editModal').modal('hide');
+                    lista();
+                    modal_sucess('Dados gravados com sucesso.');
+                }
+                else
+                {
+                    $('#msg_edit').html('<div class="alert alert-danger"> Erro: '+e+'</div>');
+                }
+            },
+            error: function(){
+                $('#msg_edit').html('<div class="alert alert-danger">Erro: Requisição a servidor falhou, tende novamente!</div>');
+            }
+        });
+    }
+
+
     function lista(){
         // tabela de cores
         var tab = $('#dataTables-lista').DataTable();
         tab.ajax.reload( null, false );
     }
 
-    function clear_form(){
+    function clear_form_add(){
         $('#msg_add').html('');
+        $('#frmModelMoAdd').each (function(){
+            this.reset();
+        });
+    }
 
+    function modal_sucess(msg){
+        $('#msg_modal').html('<div class="alert alert-success">'+msg+'</div>');
     }
 </script>
 

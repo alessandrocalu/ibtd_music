@@ -72,17 +72,37 @@ class Propriedades extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
         header("Content-Type: application/json");
 
+
+
         echo '{
                 "data": [';
         $lista = "";
         foreach($propriedades as $item_propriedade) {
-            $lista .= '{ "id": "' . $item_propriedade["id"] . '", "nome": "' . $item_propriedade["nome"] . '",  "tabela": "' . $item_propriedade["tabela"] . '"},';
+
+            // monta class inativa
+            if($item_propriedade["status"] == 0){
+                $classInativa = 'class=\"inativo\"';
+                $linkDisabled = 'disabled';
+            }else{
+                $classInativa = '';
+                $linkDisabled = '';
+            }
+
+
+            $lista .= '{ "id": "' . $item_propriedade["id"] . '",
+                         "nome": "<span '.$classInativa.'>' . $item_propriedade["nome"] . '</span>",
+                         "tabela": "<span '.$classInativa.'>' . $item_propriedade["tabela"] . '</span>"},';
         }
 
         echo substr($lista, 0, -1);
         echo ']
 
             }';
+    }
+
+    public function edit_form($id = NULL){
+        $data['propriedade_item'] = $this->propriedade_model->get_propriedade($id);
+        $this->load->view('telas/propriedades/edit_form', $data);
     }
 
     public function add_json(){
@@ -96,11 +116,44 @@ class Propriedades extends CI_Controller {
         }else{
             $dados = array(
                 'nome' => $this->input->post('nome'),
-                'tabela' => $this->input->post('descricao'),
-                'id_tamanho' => $this->input->post('tamanho')
+                'tabela' => $this->input->post('tabela'),
+                'status' => $this->input->post('status')
             );
 
-            if($this->produtos->add_propriedades($dados)){
+            //Verifica se Tabela exist
+            if (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
+                echo 'Tabela inexistente!';
+            }
+            elseif($this->propriedade_model->set_propriedade()){
+                echo 'OK';
+            }else{
+                echo 'Erro em banco de dados ao tentar gravar propriedade, tende novamente!';
+            }
+        }
+    }
+
+    public function update_json(){
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('id', 'Id', 'required');
+        $this->form_validation->set_rules('nome', 'Nome', 'required');
+        $this->form_validation->set_rules('tabela', 'Tabela', 'required');
+
+        if($this->form_validation->run() === FALSE){
+            echo 'Preencha as informações do formulário corretamente!';
+        }else{
+            $dados = array(
+                'id' => $this->input->post('id'),
+                'nome' => $this->input->post('nome'),
+                'tabela' => $this->input->post('tabela'),
+                'status' => $this->input->post('status')
+            );
+
+            //Verifica se Tabela exist
+            if (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
+                echo 'Tabela inexistente!';
+            }
+            elseif($this->propriedade_model->set_propriedade($dados['id'])){
                 echo 'OK';
             }else{
                 echo 'Erro em banco de dados ao tentar gravar propriedade, tende novamente!';

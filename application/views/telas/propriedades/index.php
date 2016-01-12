@@ -6,6 +6,7 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
+    <div id="msg_modal"></div>
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">

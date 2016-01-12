@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="frmModelMoAdd" action="" method = "post">
+                <form id="frmModalAdd" action="" method = "post">
                     <div id="msg_add"></div>
                     <div class="form-group">
                         <label>Nome</label>
@@ -18,9 +18,16 @@
                         <label>Tabela</label>
                         <input class="form-control" placeholder="Digite o Tabela" name="tabela" required>
                     </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" name="status">
+                            <option value="0" >Inativo</option>
+                            <option value="1" >Ativo</option>
+                        </select>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" name="salvar" value="salvar" onclick="add_modal()">Gravar</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="clear_msg()" >Voltar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="clear_form_add()" >Voltar</button>
                     </div>
                 </form>
             </div>
