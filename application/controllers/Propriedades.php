@@ -82,10 +82,8 @@ class Propriedades extends CI_Controller {
             // monta class inativa
             if($item_propriedade["status"] == 0){
                 $classInativa = 'class=\"inativo\"';
-                $linkDisabled = 'disabled';
             }else{
                 $classInativa = '';
-                $linkDisabled = '';
             }
 
 

@@ -12,3 +12,6 @@
 <!-- DataTables JavaScript -->
 <script src="<?php echo base_url('layout/adm/js/plugins/dataTables/jquery.dataTables.js'); ?>"></script>
 <script src="<?php echo base_url('layout/adm/js/plugins/dataTables/dataTables.bootstrap.js'); ?>"></script>
+
+<!-- TreeFy Javascript -->
+<script src="<?php echo base_url('layout/adm/js/plugins/treeFy/bootstrap-treefy.js'); ?>"></script>

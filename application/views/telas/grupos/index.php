@@ -16,7 +16,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-lista">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-tree">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -25,7 +25,7 @@
                             </thead>
                             <tbody>
                             <?php foreach ($grupos as $grupo_item): ?>
-                            <tr>
+                            <tr data-node="treetable-<?php echo $grupo_item['id'];?>" <?php echo (($grupo_item['id_grupo_pai'] > 0)?'data-pnode="treetable-parent-'.$grupo_item['id_grupo_pai'].'"':'');   ?> >
                                 <td><?php echo $grupo_item['id']; ?></td>
                                 <td><?php echo $grupo_item['nome']; ?></td>
                             </tr>

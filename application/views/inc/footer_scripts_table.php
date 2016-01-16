@@ -1,36 +1,47 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
+
+
     var table = '';
     $(document).ready(function() {
-        table = $('#dataTables-lista').DataTable({
-            responsive: true,
-            language: {
-                lengthMenu:'Mostrar _MENU_ registros',
-                search: 'Buscar: ',
-                info: 'Mostrando _START_ de _END_ de _TOTAL_ registros.',
-                infoFiltered:'(_MAX_ registro(s) filtrados)',
-                infoEmpty: 'Nenhum registro encontrado',
-                emptyTable:'Nenhum registro encontrado',
-                paginate: {
-                    previous: 'Anterior',
-                    next: 'Próximo'
-                },
-                zeroRecords: 'Nenhum registro encontrado',
-                thousands: '.',
-                decimal: '',
-                loadingRecords: "Carregando...",
-                processing: 'Processando...'
-            },
-            columnDefs: [
-                { searchable: false,
-                    orderable: false,
-                    width: 30,
-                    targets: 0 }
-            ],
-            <?php echo  $columns.',' ?>
-            ajax: './<?php echo $controller; ?>/lista_json'
 
-        });
+        <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
+            table = $("#dataTables-tree").treeFy({
+                        treeColumn: 1
+                    });
+        <?php }  else  { ?>
+            table = $('#dataTables-lista').DataTable({
+                responsive: true,
+                language: {
+                    lengthMenu: 'Mostrar _MENU_ registros',
+                    search: 'Buscar: ',
+                    info: 'Mostrando _START_ de _END_ de _TOTAL_ registros.',
+                    infoFiltered: '(_MAX_ registro(s) filtrados)',
+                    infoEmpty: 'Nenhum registro encontrado',
+                    emptyTable: 'Nenhum registro encontrado',
+                    paginate: {
+                        previous: 'Anterior',
+                        next: 'Próximo'
+                    },
+                    zeroRecords: 'Nenhum registro encontrado',
+                    thousands: '.',
+                    decimal: '',
+                    loadingRecords: "Carregando...",
+                    processing: 'Processando...'
+                },
+                columnDefs: [
+                    {
+                        searchable: false,
+                        orderable: false,
+                        width: 30,
+                        targets: 0
+                    }
+                ],
+                <?php echo  $columns.',' ?>
+                ajax: './<?php echo $controller; ?>/lista_json'
+
+            });
+        <?php } ?>
 
     });
 

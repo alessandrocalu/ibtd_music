@@ -10,24 +10,22 @@ class Propriedade_model extends CI_Model
 
     public function get_propriedade($id = FALSE)
     {
-        global $id_estabelecimento;
         if ($id === FALSE) {
-            $query = $this->db->get_where('tb_propriedade', array('id_estabelecimento' => $id_estabelecimento ));
+            $query = $this->db->get_where('tb_propriedade', array('id_estabelecimento' => ID_ESTABELECIMENTO ));
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('tb_propriedade', array('id' => $id, 'id_estabelecimento' => $id_estabelecimento ));
+        $query = $this->db->get_where('tb_propriedade', array('id' => $id, 'id_estabelecimento' => ID_ESTABELECIMENTO ));
         return $query->row_array();
     }
 
 
     public function set_propriedade($id = FALSE)
     {
-        global $id_estabelecimento;
         $data = array(
             'nome' => $this->input->post('nome'),
             'tabela' => $this->input->post('tabela'),
-            'id_estabelecimento' => $id_estabelecimento,
+            'id_estabelecimento' => ID_ESTABELECIMENTO,
             'status' => $this->input->post('status')
         );
 

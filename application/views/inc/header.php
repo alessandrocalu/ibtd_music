@@ -27,10 +27,10 @@ else
                     <ul class="nav" id="side-menu">
                         <!--<li>
                             <a href="<?php echo base_url('/'); ?>"><i class="fa fa-table fa-fw"></i> Produtos</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url('/grupos'); ?>"><i class="fa fa-sitemap fa-fw"></i> Grupos</a>
-                        </li> -->
+                        </li>
                         <li>
                             <a href="<?php echo base_url('/propriedades'); ?>"><i class="fa fa-table fa-fw"></i> Propriedades</a>
                         </li>
