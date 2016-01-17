@@ -1,11 +1,35 @@
 <?php
 class Grupos extends CI_Controller {
 
+    private $lista_grupos_pai = array();
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('grupo_model');
         $this->load->helper('url_helper');
+    }
+
+    public function monta_select_grupo_pai($id = 0, $id_grupo_pai = 0, $id_grupo_pai_selected = 0, $espaco = ''){
+        $selected = false;
+
+        $grupos = $this->grupo_model->get_grupo(FALSE, $id_grupo_pai);
+
+        if(count($grupos) > 0) {
+            foreach ($grupos as $grupo) {
+                if ($grupo["id"] != $id) {
+
+                    if ($grupo["id"] == $id_grupo_pai_selected) {
+                        $selected = true;
+                    } else {
+                        $selected = false;
+                    }
+
+                    $this->lista_grupos_pai[] = array("id" => $grupo["id"], "nome" => (($espaco <> '')?$espaco.'-':'').$grupo["nome"], "selected" => $selected);
+                    $this->monta_select_grupo_pai($id, $grupo["id"], $id_grupo_pai_selected, $espaco."&nbsp;&nbsp;");
+                }
+            }
+        }
     }
 
     public function index()
@@ -15,6 +39,10 @@ class Grupos extends CI_Controller {
         $data['controller'] = 'grupos';
         $data['columns'] = " 'columns': [ { 'data':'id'}, { 'data':'nome'} ] ";
         $data['tipoTable'] = 'tree';
+
+        $this->lista_grupos_pai = array();
+        $this->monta_select_grupo_pai(0, 0, 0, '');
+        $data['grupos_pai'] = $this->lista_grupos_pai;
 
         $this->load->view('inc/header_html', $data);
         $this->load->view('inc/header', $data);
@@ -99,6 +127,11 @@ class Grupos extends CI_Controller {
 
     public function edit_form($id = NULL){
         $data['grupo_item'] = $this->grupo_model->get_grupo($id);
+
+        $this->lista_grupos_pai = array();
+        $this->monta_select_grupo_pai($id, 0, $data['grupo_item']['id_grupo_pai'], '');
+        $data['grupos_pai'] = $this->lista_grupos_pai;
+
         $this->load->view('telas/grupos/edit_form', $data);
     }
 
@@ -113,6 +146,7 @@ class Grupos extends CI_Controller {
         }else{
             $dados = array(
                 'nome' => $this->input->post('nome'),
+                'id_grupo_pai' => $this->input->post('id_grupo_pai'),
                 'status' => $this->input->post('status')
             );
 
@@ -136,6 +170,7 @@ class Grupos extends CI_Controller {
             $dados = array(
                 'id' => $this->input->post('id'),
                 'nome' => $this->input->post('nome'),
+                'id_grupo_pai' => $this->input->post('id_grupo_pai'),
                 'status' => $this->input->post('status')
             );
 

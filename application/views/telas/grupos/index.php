@@ -1,4 +1,3 @@
-
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -16,7 +15,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-tree">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-lista">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -24,10 +23,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($grupos as $grupo_item): ?>
+                            <?php foreach ($grupos as $grupo_item):?>
                             <tr data-node="treetable-<?php echo $grupo_item['id'];?>" <?php echo (($grupo_item['id_grupo_pai'] > 0)?'data-pnode="treetable-parent-'.$grupo_item['id_grupo_pai'].'"':'');   ?> >
-                                <td><?php echo $grupo_item['id']; ?></td>
-                                <td><?php echo $grupo_item['nome']; ?></td>
+                                <td <?php echo (($grupo_item['status'] == 0)?' class="inativo"  ':'');?> ><?php echo $grupo_item['id']; ?></td>
+                                <td <?php echo (($grupo_item['status'] == 0)?' class="inativo"  ':'');?> ><?php echo $grupo_item['nome']; ?></td>
                             </tr>
                             <?php endforeach; ?>
                             </tbody>

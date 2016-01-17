@@ -15,6 +15,15 @@
                         <input class="form-control" placeholder="Digite o Nome" name="nome" value="<?php echo $grupo_item['nome']; ?>" required>
                     </div>
                     <div class="form-group">
+                        <label>Grupo Pai</label>
+                        <select class="form-control" name="id_grupo_pai">
+                            <option value="0" >Nenhum</option>
+                            <?php foreach ($grupos_pai as $grupo_pai_item): ?>
+                                <option  <?php echo ($grupo_pai_item['selected']?'selected':''); ?> value="<?php echo $grupo_pai_item["id"]; ?>" ><?php echo $grupo_pai_item["nome"]; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Status</label>
                         <select class="form-control" name="status">
                             <option value="0" <?php echo ($grupo_item['status'] != 1?' selected':''); ?> >Inativo</option>

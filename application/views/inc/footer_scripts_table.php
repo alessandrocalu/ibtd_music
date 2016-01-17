@@ -6,10 +6,10 @@
     $(document).ready(function() {
 
         <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
-            table = $("#dataTables-tree").treeFy({
+            $("#dataTables-lista").treeFy({
                         treeColumn: 1
                     });
-        <?php }  else  { ?>
+        <?php } ?>
             table = $('#dataTables-lista').DataTable({
                 responsive: true,
                 language: {
@@ -28,7 +28,14 @@
                     decimal: '',
                     loadingRecords: "Carregando...",
                     processing: 'Processando...'
-                },
+                }
+        <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
+                ,
+                ordering: false
+
+        <?php } else { ?>
+                ,
+                order: [[ 1, 'asc' ]],
                 columnDefs: [
                     {
                         searchable: false,
@@ -40,9 +47,9 @@
                 <?php echo  $columns.',' ?>
                 ajax: './<?php echo $controller; ?>/lista_json'
 
-            });
         <?php } ?>
 
+            });
     });
 
     $('#dataTables-lista').on( 'draw.dt', function () {
@@ -59,7 +66,11 @@
     });
 
     $('#dataTables-lista tbody').on( 'click', 'tr', function () {
-        edit_modal( table.row( this ).data().id );
+        <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
+            edit_modal( table.row( this ).data()[0] );
+        <?php } else { ?>
+            edit_modal( table.row( this ).data().id );
+        <?php } ?>
     } );
 
 
@@ -72,18 +83,27 @@
             data: dados,
             url: './<?php echo $controller; ?>/add_json',
             beforeSend: function(){
-                $('#msg_add').html('<div class="alert alert­info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
+                $('#msg_add').html('<div class="alert alert-info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
             },
             success: function(e){
                 if (e == 'OK') {
+                    <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
 
-                    $('#msg_add').html('');
-                    $('#frmModalAdd').each (function(){
-                        this.reset();
-                    });
-                    $('#addModal').modal('hide');
-                    lista();
-                    modal_sucess('Dados gravados com sucesso.');
+                        $('#msg_add').html('<div class="alert alert-success">Dados gravados com sucesso.</div>');
+                        location.reload();
+
+                    <?php } else { ?>
+
+                        $('#msg_add').html('');
+                        $('#frmModalAdd').each (function(){
+                            this.reset();
+                        });
+                        $('#addModal').modal('hide');
+
+                        lista();
+                        modal_sucess('Dados gravados com sucesso.');
+
+                    <?php } ?>
                 }
                 else
                 {
@@ -102,12 +122,14 @@
             type: 'GET',
             url: './<?php echo $controller; ?>/edit_form/'+id,
             beforeSend: function(){
-                $('#msg_modal').html('<div class="alert alert-warning">Aguarde carregando <?php echo strtolower($title); ?>...</div>');
+                $('#msg_modal').html('<div class="alert alert-info">Aguarde carregando <?php echo strtolower($title); ?>...</div>');
             },
             success: function(e){
+
                 $('#msg_modal').html('');
                 $('#retorno_modal').html(e);
                 $('#editModal').modal();
+
             },
             error: function(){
                 $('#msg_modal').html('<div class="alert alert-danger">Erro: Requisição a servidor falhou, tende novamente!</div>');
@@ -124,17 +146,28 @@
             data: dados,
             url: './<?php echo $controller; ?>/update_json',
             beforeSend: function(){
-                $('#msg_edit').html('<div class="alert alert­info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
+                $('#msg_edit').html('<div class="alert alert-info">Aguarde, gravando <?php echo strtolower($title); ?>...</div>');
             },
             success: function(e){
                 if (e == 'OK') {
-                    $('#msg_edit').html('');
-                    $('#frmModalEdit').each (function(){
-                        this.reset();
-                    });
-                    $('#editModal').modal('hide');
-                    lista();
-                    modal_sucess('Dados gravados com sucesso.');
+                    <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
+
+                        $('#msg_edit').html('<div class="alert alert-success">Dados gravados com sucesso.</div>');
+                        location.reload();
+
+                    <?php } else { ?>
+
+                        $('#msg_edit').html('');
+                        $('#frmModalEdit').each (function(){
+                            this.reset();
+                        });
+                        $('#editModal').modal('hide');
+
+                        lista();
+                        modal_sucess('Dados gravados com sucesso.');
+
+                    <?php } ?>
+
                 }
                 else
                 {

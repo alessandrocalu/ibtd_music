@@ -118,8 +118,23 @@ class Propriedades extends CI_Controller {
                 'status' => $this->input->post('status')
             );
 
+            //Verifica nome repetido
+            $nome = $this->input->post('nome');
+            $lista_nome = $this->propriedade_model->get_propriedade(false,$nome);
+            //Verifica tabela repetido
+            $tabela = $this->input->post('tabela');
+            $lista_tabela = $this->propriedade_model->get_propriedade(false,'',$tabela);
+
+            //Verifica nome repetido
+            if (count($lista_nome) > 0) {
+                echo 'Já existe propriedade com este nome!';
+            }
+            //Verifica tabela repetido
+            elseif (count($lista_tabela) > 0) {
+                echo 'Já existe propriedade com esta tabela!';
+            }
             //Verifica se Tabela exist
-            if (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
+            elseif (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
                 echo 'Tabela inexistente!';
             }
             elseif($this->propriedade_model->set_propriedade()){
@@ -147,8 +162,24 @@ class Propriedades extends CI_Controller {
                 'status' => $this->input->post('status')
             );
 
+            //Verifica nome repetido
+            $id = $this->input->post('id');
+            $nome = $this->input->post('nome');
+            $lista_nome = $this->propriedade_model->get_propriedade($id,$nome);
+            //Verifica tabela repetido
+            $tabela = $this->input->post('tabela');
+            $lista_tabela = $this->propriedade_model->get_propriedade($id,'',$tabela);
+
+            //Verifica nome repetido
+            if (count($lista_nome) > 0) {
+                echo 'Já existe propriedade com este nome!';
+            }
+            //Verifica tabela repetido
+            elseif (count($lista_tabela) > 0) {
+                echo 'Já existe propriedade com esta tabela!';
+            }
             //Verifica se Tabela exist
-            if (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
+            elseif (!$this->propriedade_model->db->table_exists($dados['tabela'])) {
                 echo 'Tabela inexistente!';
             }
             elseif($this->propriedade_model->set_propriedade($dados['id'])){

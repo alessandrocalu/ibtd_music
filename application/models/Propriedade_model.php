@@ -8,10 +8,37 @@ class Propriedade_model extends CI_Model
     }
 
 
-    public function get_propriedade($id = FALSE)
+    public function get_propriedade($id = FALSE, $nome = "", $tabela = "")
     {
+
+        if ($nome <> ''){
+            if ($id === FALSE) {
+                $query = $this->db->get_where('tb_propriedade', array('nome' => $nome, 'id_estabelecimento' => ID_ESTABELECIMENTO));
+            }
+            else
+            {
+                $query = $this->db->get_where('tb_propriedade', array('id !=' => $id, 'nome' => $nome, 'id_estabelecimento' => ID_ESTABELECIMENTO));
+            }
+            return $query->row_array();
+        }
+
+
+        if ($tabela <> '')
+        {
+            if ($id === FALSE) {
+                $query = $this->db->get_where('tb_propriedade', array('tabela' => $tabela, 'id_estabelecimento' => ID_ESTABELECIMENTO ));
+            }
+            else
+            {
+                $query = $this->db->get_where('tb_propriedade', array('id !=' => $id, 'tabela' => $tabela, 'id_estabelecimento' => ID_ESTABELECIMENTO ));
+            }
+            return $query->row_array();
+        }
+
         if ($id === FALSE) {
+            $this->db->order_by('nome asc');
             $query = $this->db->get_where('tb_propriedade', array('id_estabelecimento' => ID_ESTABELECIMENTO ));
+
             return $query->result_array();
         }
 
