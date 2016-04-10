@@ -12,17 +12,17 @@ class Grupo_model extends CI_Model {
             $this->db->order_by('id_grupo_pai asc, nome asc');
 
             if ($id_grupo_pai === FALSE) {
-                $query = $this->db->get_where('tb_grupo', array('id_estabelecimento' => ID_ESTABELECIMENTO));
+                $query = $this->db->get('grupo');
             }
             else
             {
-                $query = $this->db->get_where('tb_grupo', array('id_grupo_pai' => $id_grupo_pai, 'id_estabelecimento' => ID_ESTABELECIMENTO));
+                $query = $this->db->get_where('grupo', array('id_grupo_pai' => $id_grupo_pai));
             }
             return $query->result_array();
         }
 
 
-        $query = $this->db->get_where('tb_grupo', array('id' => $id, 'id_estabelecimento' => ID_ESTABELECIMENTO));
+        $query = $this->db->get_where('grupo', array('id' => $id));
         return $query->row_array();
     }
 
@@ -30,7 +30,6 @@ class Grupo_model extends CI_Model {
     {
         $data = array(
             'nome' => $this->input->post('nome'),
-            'id_estabelecimento' => ID_ESTABELECIMENTO,
             'id_grupo_pai' => $this->input->post('id_grupo_pai'),
             'status' => $this->input->post('status')
         );
@@ -38,11 +37,11 @@ class Grupo_model extends CI_Model {
         if ($id != FALSE)
         {
             $this->db->where('id', $id);
-            return $this->db->update('tb_grupo', $data);
+            return $this->db->update('grupo', $data);
         }
         else
         {
-            return $this->db->insert('tb_grupo', $data);
+            return $this->db->insert('grupo', $data);
         }
     }
 }

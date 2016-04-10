@@ -11,15 +11,18 @@
 
     <?php
     if (!isset($title)) {
-        $title = "Gerência de Produtos";
+        $title = "Músicas de louvor IBTD";
     }
     else
     {
-        $title = "Gerência de Produtos - ".$title;
+        $title = "Músicas de louvor IBTD - ".$title;
     }
     ?>
 
     <title><?php echo $title; ?></title>
+
+    <!-- JQuery UI Core CSS -->
+    <link href="<?php echo base_url('layout/adm/css/jquery-ui.min.css'); ?>" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('layout/adm/css/bootstrap.min.css'); ?>" rel="stylesheet">

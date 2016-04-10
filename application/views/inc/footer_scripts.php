@@ -3,6 +3,9 @@
 <!-- jQuery Version 1.11.0 -->
 <script src="<?php echo base_url('layout/adm/js/jquery-1.11.0.js'); ?>"></script>
 
+<!-- jQuery UI Version 1.11.4 -->
+<script src="<?php echo base_url('layout/adm/js/jquery-ui.min.js'); ?>"></script>
+
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo base_url('layout/adm/js/bootstrap.min.js'); ?>"></script>
 

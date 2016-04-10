@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Listagem de Propriedades
+                    Listagem de Músicas
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -22,15 +22,19 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Tabela</th>
+                                <th>Palavras</th>
+                                <th>Links</th>
+                                <th>Grupo</th>    
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($propriedades as $propriedade_item): ?>
+                            <?php foreach ($musicas as $musica_item): ?>
                                 <tr>
-                                    <td><?php echo $propriedade_item['id']; ?></td>
-                                    <td><?php echo $propriedade_item['nome']; ?></td>
-                                    <td><?php echo $propriedade_item['tabela']; ?></td>
+                                    <td><?php echo $musica_item['id']; ?></td>
+                                    <td><?php echo $musica_item['palavras']; ?></td>
+                                    <td><?php echo $musica_item['autor']; ?></td>
+                                    <td></td>
+                                    <td><?php echo $musica_item['grupo']; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

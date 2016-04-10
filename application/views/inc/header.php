@@ -1,10 +1,10 @@
 <?php
 if (!isset($title)) {
-    $title = "Gerência de Produtos";
+    $title = "IBTD Music - Músicas do Louvor";
 }
 else
 {
-    $title = "Gerência de Produtos - ".$title;
+    $title = "IBTD Music - Músicas do Louvor - ".$title;
 }
 ?>
 
@@ -26,13 +26,13 @@ else
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <!--<li>
-                            <a href="<?php echo base_url('/'); ?>"><i class="fa fa-table fa-fw"></i> Produtos</a>
+                            <a href="<?php echo base_url('index.php/pessoas'); ?>"><i class="fa fa-group fa-fw"></i> Pessoas</a>
                         </li> -->
                         <li>
-                            <a href="<?php echo base_url('/grupos'); ?>"><i class="fa fa-sitemap fa-fw"></i> Grupos</a>
+                            <a href="<?php echo base_url('index.php/grupos'); ?>"><i class="fa fa-sitemap fa-fw"></i> Grupos</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('/propriedades'); ?>"><i class="fa fa-table fa-fw"></i> Propriedades</a>
+                            <a href="<?php echo base_url('index.php/musicas'); ?>"><i class="fa fa-table fa-fw"></i> Músicas</a>
                         </li>
                     </ul>
                 </div>

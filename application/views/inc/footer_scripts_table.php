@@ -65,13 +65,17 @@
         }
     });
 
-    $('#dataTables-lista tbody').on( 'click', 'tr', function () {
-        <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
-            edit_modal( table.row( this ).data()[0] );
-        <?php } else { ?>
-            edit_modal( table.row( this ).data().id );
-        <?php } ?>
-    } );
+    <?php if ( (!isset($button_edit)) || ($button_edit != 1)) { ?>
+
+        $('#dataTables-lista tbody').on( 'click', 'tr', function () {
+            <?php if (isset($tipoTable) && ($tipoTable == 'tree')){ ?>
+                edit_modal( table.row( this ).data()[0] );
+            <?php } else { ?>
+                edit_modal( table.row( this ).data().id );
+            <?php } ?>
+        } );
+
+    <?php } ?>
 
 
     function add_modal(){
@@ -196,6 +200,11 @@
 
     function modal_sucess(msg){
         $('#msg_modal').html('<div class="alert alert-success">'+msg+'</div>');
+    }
+
+
+    function abrelocal(link){
+        window.open(link);  
     }
 </script>
 
